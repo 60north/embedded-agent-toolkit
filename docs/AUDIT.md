@@ -11,21 +11,24 @@ Superpowers `2ce8aa15d05bd57213e6f746f953aafb7ded7a8b` before this refactor.
 | citypaul planning/debugging/testing/review overlaps Superpowers | Two competing process owners | Superpowers is the sole active workflow source |
 | Superpowers bootstrap demands a skill before every response | Excessive work for trivial tasks | Engineering-only routing, minimum relevant skills |
 | Superpowers brainstorming/plans enforce approval rituals | Repeated confirmations for already specified work | Clarify only material gaps, small tasks inline |
-| Superpowers executors/reviewers dispatch subagents and require worktrees | User wants independently scoped clients in one project | Inline execution; no orchestrator, worktrees optional |
+| Superpowers executors/reviewers dispatch subagents and require worktrees | Heavy fixed ritual; conflicts with project workflows | `delegating-work`: compact worker contract, read-only subagents, writing steps in separate worktree sessions, project workflow takes precedence |
 | Original installation uses separate client copies | Drift and reinstall on updates | Both discovery directories link to canonical `skills/` |
 | No shared durable experience | Repeated mistakes; unverified advice becomes doctrine | SQLite local ledger, observations separate from practices |
 | Existing release workflow automatically tags upstream version | Misleading releases in a fork | Archive upstream workflows; engineering CI only |
 
-Original citypaul content and notices remain in `legacy/citypaul/`, outside all
-installer discovery paths. It is historical reference, never an instruction source.
-Shell dotfiles remain as optional original material. No web skills are active.
+The original citypaul agent material (`legacy/citypaul/`) and the personal shell,
+terminal and GnuPG dotfiles with `setup-dotfiles.sh` were removed from the tree
+in the toolkit cleanup; they remain in Git history at `cd4028d` and `0e62f80`.
+No web skills are present.
 
 Superpowers is vendored selectively into canonical `skills/` (no parallel vendor
 copy). The manifest pins the upstream commit and every imported path. Local
 adaptations are maintained by three-way updates using Git upstream blobs, not by
 silently replacing local skills with newer upstream instructions. Omitted skills:
-subagent orchestration, parallel dispatch, automatic branch finishing/worktrees,
-meta-authoring and transcript diagnostics. No marketplace plugin is also installed.
+the full subagent-driven-development ritual (fix-loop caps, helper scripts,
+continuous execution without check-ins) and parallel dispatch as separate skills
+(their worker contract is condensed into `delegating-work`), automatic branch
+finishing/worktrees, meta-authoring and transcript diagnostics. No marketplace plugin is also installed.
 
 ## Acceptance limitations
 

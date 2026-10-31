@@ -120,4 +120,4 @@ Skip any step = lying, not verifying
 - ANY communication suggesting completion/correctness
 
 ## Engineering adaptation
-Follow policies/ENGINEERING.md and policies/MEMORY.md. Use only your assigned scope. Do not dispatch subagents or require a worktree. Use host, target, emulation and hardware evidence as distinct claims. Recall relevant shared experience before investigation; record useful results, failures and evidence before finishing.
+Follow policies/ENGINEERING.md and policies/MEMORY.md. Use only your assigned scope. Delegate bulky work per delegating-work. Use host, target, emulation and hardware evidence as distinct claims. Recall relevant shared experience before investigation; record useful results, failures and evidence before finishing.

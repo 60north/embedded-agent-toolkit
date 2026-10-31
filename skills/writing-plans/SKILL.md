@@ -12,5 +12,5 @@ Separate code tests from ERC/DRC/visual and physical checks. Note unavailable to
 Do not prescribe edits to another agent's assigned scope; agree interface changes.
 Keep commands concrete after inspecting the installed tool versions. Do not write
 complete speculative production code into the plan or split trivial work into
-many ceremonial steps. Execute inline using executing-plans once authorized;
-the user's request to implement is authorization. No orchestrator is required.
+many ceremonial steps. Mark which steps a worker should execute and what each
+returns (delegating-work). Execute with executing-plans once authorized.

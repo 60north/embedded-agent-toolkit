@@ -5,8 +5,10 @@ Canonical runtime files are under ../skills/, not duplicated here.
 upstream and post-adaptation SHA-256. `SUPERPOWERS-LICENSE` is the upstream license.
 The original upstream file is recovered from Git for three-way updates.
 
-Local adaptations: engineering-only/proportional bootstrap, no forced subagents,
-worktrees or planning for small tasks, no destructive TDD restart, shared memory
+Local adaptations: engineering-only/proportional bootstrap, delegation condensed
+into skills/delegating-work (rewritten from subagent-driven-development and
+dispatching-parallel-agents at the pinned revision; not three-way managed),
+no forced worktrees or planning for small tasks, no destructive TDD restart, shared memory
 lifecycle, native unqualified skill names, domain-appropriate verification.
 The audit documents exclusions. Retained references illustrate concepts and do
 not impose TypeScript as the engineering language. Unused platform wrappers,

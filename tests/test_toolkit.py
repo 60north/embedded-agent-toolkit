@@ -153,9 +153,9 @@ class ToolkitTests(unittest.TestCase):
         self.assertEqual(merge(b'a\nb\n',b'a\nb\n',b'upstream\nb\n'),b'upstream\nb\n')
         with self.assertRaises(ValueError):merge(b'ours\n',b'base\n',b'theirs\n')
 
-    def test_skill_inventory_and_no_orchestration(self):
+    def test_skill_inventory_and_condensed_delegation(self):
         names={p.parent.name for p in (ROOT/'skills').glob('*/SKILL.md')}
-        self.assertTrue({'engineering-stm32','engineering-freertos','engineering-hardware-review','using-superpowers'} <= names)
+        self.assertTrue({'engineering-stm32','engineering-freertos','engineering-hardware-review','using-superpowers','delegating-work'} <= names)
         self.assertFalse({'subagent-driven-development','dispatching-parallel-agents','typescript-strict','tdd'} & names)
         for p in (ROOT/'skills').glob('*/SKILL.md'):
             text=p.read_text();self.assertTrue(text.startswith('---\nname: '+p.parent.name+'\n'))

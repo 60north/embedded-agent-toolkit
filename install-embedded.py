@@ -78,7 +78,8 @@ def install(home, project=None, memory=None, migrate=False, dry_run=False, root=
             f'Use the same canonical skills `{skills.as_posix()}`, scripts `{root.as_posix()}/scripts`, '
             f'and shared experience directory `{memory.as_posix()}` in both clients.\n'
             'Choose relevant skills automatically. No per-session activation or agent switching.\n'
-            'Work only in the user-assigned scope; no orchestrator and no mandatory worktree.\n'
+            'Work only in the user-assigned scope; a project workflow takes precedence.\n'
+            'Keep the main context small: delegate bulky work per `delegating-work`.\n'
             'Before work recall relevant experience; before finishing record useful outcomes and evidence.\n')
     writes, backups, new_links = {}, {}, []
     settings = [(links[0].parent/'settings.json', claude_memory),

@@ -15,19 +15,19 @@
   "files": {
     "skills/using-superpowers/SKILL.md": {
       "upstream_sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
-      "installed_sha256": "addbb1e0b580504f9c37be133c3f462617ead347720e334c020c8e793fb068b4"
+      "installed_sha256": "e7d32f89f478fac2c1e84e3cf2c0b21eb4cbcac8bfb4b9a43d751a0f4683999e"
     },
     "skills/brainstorming/SKILL.md": {
       "upstream_sha256": "61a7ef918652108c76a3fd01e02dd92d39996c6b46d4cb2819cbd03f6c45e46a",
-      "installed_sha256": "aa527e92e12a1fa3a6658bda78c445a526d1c41146311d0148ab9e0683838a66"
+      "installed_sha256": "b46fcca86d20ef0ae0cd947efaa7c72dd642a7c0c8f2530d8e9ae98a19f2b69a"
     },
     "skills/writing-plans/SKILL.md": {
       "upstream_sha256": "a6c67c1900064347c2a329990dd3c555657c51c3ec53b259a08aa01a2c26139a",
-      "installed_sha256": "8d1acf033496fb3428b7496839118a3b1c2c89e994725d975255b084115d43cc"
+      "installed_sha256": "90ca91a2afb068aa90a71497c32844a19bfd5b21e6e4dd7256659f4fe545fdb3"
     },
     "skills/executing-plans/SKILL.md": {
       "upstream_sha256": "e4649e59880ef2643d1da128e3d607e87e3f969410d72095a5bf65811b6036dc",
-      "installed_sha256": "425560952c342515c90f01305724be935c610697c846ec4775c4be04dd29d602"
+      "installed_sha256": "42891dcb7e85db7dbdc9d6173b5e1254d86f50a645d5f67625d13bab48ab596e"
     },
     "skills/systematic-debugging/condition-based-waiting.md": {
       "upstream_sha256": "e89fec8400d6cd50f43407cec9fab50976ba4d55d0ec2eb51c0bd68036b54c26",
@@ -39,7 +39,7 @@
     },
     "skills/systematic-debugging/SKILL.md": {
       "upstream_sha256": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202",
-      "installed_sha256": "28a135879e6d08acffbbe614343ec3b9330916aafdb44753e43d680eeb6fc190"
+      "installed_sha256": "8a64f7e0a96f2b1491981641f30aeaa123ba549e854d5dc1279541d849482e46"
     },
     "skills/systematic-debugging/condition-based-waiting-example.ts": {
       "upstream_sha256": "40ae5ebe497fdf310200e43fe986552546d0a22837c0d39e855db1cfd33eb88e",
@@ -63,15 +63,15 @@
     },
     "skills/verification-before-completion/SKILL.md": {
       "upstream_sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
-      "installed_sha256": "ef722a8dd782ffc73b1550ecd033c993aa26ae345878073811dcd93f5e1d43c0"
+      "installed_sha256": "f9e7b51aaebdf8c47c43940673b3340871c7e8a24256ab6b667394ac8bbfb6fa"
     },
     "skills/requesting-code-review/SKILL.md": {
       "upstream_sha256": "2180e14a448e9410bec88e6646a2d1f0ce7fdd58de27388c1e052e929679d2bc",
-      "installed_sha256": "4287d9177131b0993bd37da4d3beea0e21d21f04fcb3646b2e85bcc6511cb885"
+      "installed_sha256": "c18933a51bf2916c0b354acb25f877618917f20f0eee818360eb323fadfd7e89"
     },
     "skills/receiving-code-review/SKILL.md": {
       "upstream_sha256": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438",
-      "installed_sha256": "a1b24c66c9dcc2db49b9c0545f315fddf8a272848e255169335f7d48a01b062e"
+      "installed_sha256": "2b1124183008854158cb69c2047f161819a5f932af23439b6aadbf7fd10a1f9d"
     }
   }
 }
