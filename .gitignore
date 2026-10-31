@@ -7,3 +7,12 @@
 # Dependencies
 node_modules/
 .pnpm-store/
+
+# Python test/runtime artifacts
+__pycache__/
+*.pyc
+
+# Shared local experience and generated verification artifacts
+/experience/*
+!/experience/.gitkeep
+/.engineering-toolkit.json
