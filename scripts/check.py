@@ -10,7 +10,7 @@ import subprocess
 import sys
 import uuid
 import xml.etree.ElementTree as ET
-from experience import add, project_id
+from experience import add_run, project_id
 
 
 def revision(project):
@@ -20,9 +20,10 @@ def revision(project):
     return head+(' dirty' if r.stdout.strip() else '')
 
 
-def run(command, project, root, skill, claim, timeout=300, artifacts=(), validator=None, inputs=()):
+def run(command, project, root, skill, claim, timeout=300, artifacts=(), validator=None, inputs=(), folder=None):
     project=Path(project).resolve();root=Path(root).resolve()
-    folder=root/'runs'/uuid.uuid4().hex;folder.mkdir(parents=True)
+    # One folder per run holds report, log and tool outputs, so pruning removes it whole.
+    folder=Path(folder) if folder else root/'runs'/uuid.uuid4().hex;folder.mkdir(parents=True,exist_ok=True)
     log=folder/'output.log';report=folder/'report.json'
     data=dict(command=list(command),revision=revision(project),project=project_id(project),
               skill=skill,claim=claim,created=datetime.now(timezone.utc).isoformat(),artifacts={},inputs={},
@@ -51,9 +52,7 @@ def run(command, project, root, skill, claim, timeout=300, artifacts=(), validat
     log.write_text(output,encoding='utf-8')
     data['log_sha256']=hashlib.sha256(log.read_bytes()).hexdigest()
     report.write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
-    add(root,data['project'],skill,f'{data["status"]}: {claim}',
-        'Executed check; see evidence. A passing run only supports its stated claim.',
-        kind='failure' if data['status']=='FAIL' else 'observation',evidence=report)
+    add_run(root,data,report)
     return data, report
 
 
@@ -75,15 +74,14 @@ def main():
     k=sub.add_parser('kicad');k.add_argument('kind',choices=['erc','drc']);k.add_argument('file',type=Path)
     r=sub.add_parser('renode');r.add_argument('scenario',type=Path)
     a=p.parse_args();artifacts=[];validator=None;inputs=[]
-    root=a.memory.resolve();project=a.project.resolve()
+    root=a.memory.resolve();project=a.project.resolve();folder=root/'runs'/uuid.uuid4().hex
     if a.mode=='run':
         cmd=a.command[1:] if a.command[:1]==['--'] else a.command;skill=a.skill;claim=a.claim
     elif a.mode=='kicad':
         source=a.file.resolve();inputs=[source]
         skill='engineering-kicad-schematic' if a.kind=='erc' else 'engineering-kicad-pcb'
         claim=f'KiCad {a.kind.upper()} CLI violations only; visual/electrical review separate'
-        out=root/'artifacts'/uuid.uuid4().hex;out.mkdir(parents=True)
-        result=out/'violations.json';artifacts=[result]
+        result=folder/'violations.json';artifacts=[result]
         cmd=['kicad-cli','sch' if a.kind=='erc' else 'pcb',a.kind,'--format','json','--exit-code-violations','--output',str(result)]
         if a.kind=='drc':cmd.append('--refill-zones')
         cmd.append(str(source))
@@ -99,8 +97,8 @@ def main():
                 print('BLOCKED: installed KiCad CLI lacks required options',file=sys.stderr);return 2
     else:
         skill='engineering-renode';claim='Renode Robot scenario assertions (not physical hardware)'
-        out=root/'artifacts'/uuid.uuid4().hex;out.mkdir(parents=True)
-        result=out/'robot_output.xml'
+        out=folder/'robot';out.mkdir(parents=True)
+        result=folder/'robot_output.xml'
         scenario=a.scenario.resolve();inputs=[scenario]
         cmd=['renode-test','--results-dir',str(out),str(scenario)]
         def validator():
@@ -114,7 +112,7 @@ def main():
             for candidate in valid: validate_robot(candidate)
             result.write_text(valid[0].read_text())
         # validator creates normalized report first; evidence is then added below.
-    data,report=run(cmd,project,root,skill,claim,a.timeout,artifacts,validator,inputs)
+    data,report=run(cmd,project,root,skill,claim,a.timeout,artifacts,validator,inputs,folder)
     if a.mode=='renode' and data['status']=='PASS':
         data['artifacts'][str(result)]=hashlib.sha256(result.read_bytes()).hexdigest()
         report.write_text(json.dumps(data,indent=2)+'\n')

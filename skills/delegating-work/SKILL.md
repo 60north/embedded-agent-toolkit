@@ -62,7 +62,9 @@ The worker writes details to the report file and returns only:
 - changed files and commits, if any;
 - evidence: check report paths with PASS/FAIL/BLOCKED (use `scripts/check.py`
   where it supports the check), not a retelling of logs;
-- deviations, open questions and limitations.
+- deviations, open questions and limitations;
+- lesson candidates (tool/technique findings worth remembering). The worker
+  does not write lessons to shared memory; the main session decides.
 
 Read-only workers return the answer with file/line or document/page citations.
 

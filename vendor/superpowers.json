@@ -15,7 +15,7 @@
   "files": {
     "skills/using-superpowers/SKILL.md": {
       "upstream_sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
-      "installed_sha256": "e7d32f89f478fac2c1e84e3cf2c0b21eb4cbcac8bfb4b9a43d751a0f4683999e"
+      "installed_sha256": "bd01048d86809ef93211b42ad7638be71eab0cdd46d0ee2b163ff74dcdb7fa1c"
     },
     "skills/brainstorming/SKILL.md": {
       "upstream_sha256": "61a7ef918652108c76a3fd01e02dd92d39996c6b46d4cb2819cbd03f6c45e46a",
@@ -63,7 +63,7 @@
     },
     "skills/verification-before-completion/SKILL.md": {
       "upstream_sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
-      "installed_sha256": "f9e7b51aaebdf8c47c43940673b3340871c7e8a24256ab6b667394ac8bbfb6fa"
+      "installed_sha256": "f4c8e1b17bc169a1021d8531b8f56788f5565e049934b99a9887a16b3568b5d3"
     },
     "skills/requesting-code-review/SKILL.md": {
       "upstream_sha256": "2180e14a448e9410bec88e6646a2d1f0ce7fdd58de27388c1e052e929679d2bc",

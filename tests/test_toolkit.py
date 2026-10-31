@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
+from datetime import timedelta
 import unittest
 from unittest.mock import patch
 
@@ -133,7 +134,38 @@ class ToolkitTests(unittest.TestCase):
                 ([sys.executable,'-c','import time; time.sleep(3)'],'FAIL',0.05)]:
             result,_=check.run(cmd,self.project,root,'test','test claim',timeout)
             self.assertEqual(result['status'],status)
-        self.assertEqual(len(experience.recall(root,experience.project_id(self.project))),3)
+        scope=experience.project_id(self.project)
+        # Runs are evidence, not lessons: they never crowd recall.
+        self.assertEqual(experience.recall(root,scope),[])
+        self.assertEqual(experience.curation_status(root,scope)['pending_runs'],3)
+
+    def test_shared_lessons_visible_across_projects(self):
+        root=self.base/'memory'
+        experience.add(root,experience.SHARED,'engineering-kicad-pcb','kicad-cli flag','DRC flag missing in this version',kind='failure')
+        experience.add(root,'a','engineering-kicad-pcb','private','project fact')
+        rows=experience.recall(root,'b')
+        self.assertEqual([r['title'] for r in rows],['kicad-cli flag']);self.assertTrue(rows[0]['shared'])
+
+    def test_curation_review_finish_and_prune(self):
+        root=self.base/'memory';scope=experience.project_id(self.project)
+        ok=[sys.executable,'-c','pass'];bad=[sys.executable,'-c','raise SystemExit(1)']
+        reports={}
+        for claim,cmd in [('fixed',bad),('fixed',ok),('repeated',bad),('repeated',bad),('green',ok)]:
+            data,reports[claim]=check.run(cmd,self.project,root,'test',claim)
+        experience.add(root,scope,'test','practice','cites the passing run',kind='practice',evidence=reports['fixed'])
+        later=experience.now_utc()+timedelta(days=8)
+        self.assertTrue(experience.curation_status(root,scope,now=later)['due'])
+        self.assertFalse(experience.curation_status(root,scope)['due'])
+        summary=experience.review(root,scope)
+        self.assertEqual({c['claim']:c['signal'] for c in summary['candidates']},{'fixed':'fixed','repeated':'repeated'})
+        self.assertEqual(summary['claims_only_passed'],1);self.assertEqual(summary['broken_practices'],[])
+        check.run(ok,self.project,root,'test','after review')
+        result=experience.finish(root,scope,summary['until'],now=experience.now_utc()+timedelta(days=40))
+        self.assertEqual(result,{'reviewed':5,'pruned':4})
+        self.assertTrue(reports['fixed'].is_file())
+        self.assertFalse(reports['green'].exists());self.assertFalse(reports['green'].parent.exists())
+        self.assertEqual(experience.curation_status(root,scope)['pending_runs'],1)
+        self.assertEqual(experience.finish(root,scope,None),{'reviewed':0,'pruned':0})
 
     def test_robot_empty_skip_and_success(self):
         p=self.base/'output.xml'

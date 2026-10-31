@@ -9,7 +9,7 @@ import sys
 import tempfile
 import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from experience import add,project_id,recall
+from experience import add,curation_status,project_id,recall
 from doctor import installer
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -43,6 +43,7 @@ def main():
             for name in ('codex','claude'):
                 if not shutil.which(name):continue
                 before={r['id'] for r in recall(memory,project_id(project),limit=100)}
+                runs_before=curation_status(memory,project_id(project))['pending_runs']
                 prompt=('Fix sensor.py empty-input behavior and verify it.' if name=='codex' else
                         'Review sensor.py and its tests, verify behavior, and report any issue; do not change source files.')
                 prompt+=' Mention any relevant prior project evidence tag in your report.'
@@ -53,7 +54,9 @@ def main():
                     a.output.parent.mkdir(parents=True,exist_ok=True)
                     log=a.output.parent/(name+'-live.log');log.write_text(output)
                     after=recall(memory,project_id(project),limit=100)
-                    recorded=any(r['id'] not in before for r in after)
+                    # A lesson record or a check.py run both show the client used the ledger.
+                    recorded=(any(r['id'] not in before for r in after) or
+                              curation_status(memory,project_id(project))['pending_runs']>runs_before)
                     passed=proc.returncode==0 and token in output and skill_token in output and recorded
                     result[name]={'status':'PASS' if passed else 'FAIL','returncode':proc.returncode,
                                   'discovered_python_skill':skill_token in output,

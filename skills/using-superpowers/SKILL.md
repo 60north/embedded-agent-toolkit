@@ -14,6 +14,7 @@ pointer. These policies govern all skills, including imported references.
    change goes directly to implementation and a focused test. Use brainstorming
    only for material design uncertainty, writing-plans only for substantial work.
 3. Recall shared experience before choosing an approach using the memory script.
+   If recall reports curation as due, curate (policies/MEMORY.md).
    Treat observations as hypotheses; recheck validated practices for applicability.
 4. Execute within your assigned scope. Claude and Codex may share the checkout;
    leave another agent's files and staging entries alone. Keep the main context
@@ -21,8 +22,10 @@ pointer. These policies govern all skills, including imported references.
    approved bounded steps and non-trivial review using delegating-work. A
    project's own workflow (planner, handoffs, review) takes precedence.
 5. Test changed behavior, review the diff and use verification-before-completion.
-6. Record useful outcomes, failures and evidence in shared memory automatically
-   at task completion, without asking the user to activate a memory skill.
+6. Record useful lessons automatically at task completion, without asking the
+   user to activate a memory skill: tool/technique lessons in the ledger
+   (`--shared` when they hold beyond this project), project facts in the
+   project's own durable memory. At a formal session finish also curate runs.
 
 No 1% trigger rule, compulsory planning for tiny changes, forced model selection,
 marketplace plugin, telemetry, or per-session switches. Model choice for workers

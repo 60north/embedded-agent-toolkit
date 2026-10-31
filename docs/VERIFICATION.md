@@ -9,7 +9,8 @@
 | KiCad ERC and visual inspection | NOT RUN | Requires an actual project and KiCad |
 | Renode Robot fixture | BLOCKED | `renode-test` executable not present; fixture not executed |
 | Actual STM32U5/FreeRTOS firmware scenario | NOT RUN | Requires project models/platform, ELF and Renode |
-| Windows junction installation | NOT RUN locally | Included in Windows CI; no local Windows runtime |
+| Python stdlib unit/integration suite on Windows 10, Python 3.14.7 | PASS | Same suite incl. junction install into a temporary home, run ledger, curation review/finish/prune, shared lessons (18 tests) |
+| Real global Windows installation | NOT RUN | Not yet installed on a user profile |
 
 Executed availability/probe commands:
 
