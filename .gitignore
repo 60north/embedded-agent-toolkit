@@ -4,10 +4,6 @@
 # macOS
 .DS_Store
 
-# Dependencies
-node_modules/
-.pnpm-store/
-
 # Python test/runtime artifacts
 __pycache__/
 *.pyc

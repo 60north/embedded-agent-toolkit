@@ -2,8 +2,8 @@ Repository license scope
 
 Except where a nested `LICENSE` or `NOTICE` file states otherwise, this
 repository is licensed under the MIT License below. A nested notice governs
-its directory and takes precedence for material derived from that source; in
-particular, `legacy/citypaul/claude/.claude/skills/cli-design/` is licensed under CC BY-SA 4.0.
+its directory and takes precedence for material derived from that source.
+Vendored Superpowers material is covered by `vendor/SUPERPOWERS-LICENSE`.
 
 MIT License
 
